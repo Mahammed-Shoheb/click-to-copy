@@ -12,7 +12,7 @@ export default function Home() {
     const value = e.target.value;
     setInput(value);
     if (value !== "") {
-      let updatedWords = [];
+      const updatedWords = [];
       const words = value.trim().split(/\n+/);
       for (let i = 0; i < words.length; i += 2) {
         updatedWords.push(`${words[i]} ${words[i + 1] ?? ""}`);
