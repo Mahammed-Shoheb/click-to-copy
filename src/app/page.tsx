@@ -44,7 +44,7 @@ export default function Home() {
               htmlFor="input"
               className="text-white font-semibold text-lg md:text-xl"
             >
-              Kindly paste the block of text you :
+              Kindly paste the block of text :
             </label>
             <textarea
               name="input"
