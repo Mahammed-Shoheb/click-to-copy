@@ -4,6 +4,20 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import CopyIcon from "./CopyIcon";
 
+const fieldOrder = [
+  "Brand",
+  "Trim / Edition",
+  "Transmission",
+  "Registration year",
+  "Fuel type",
+  "Kilometers run",
+  "Model",
+  "Year of Manufacture",
+  "Condition",
+  "Body type",
+  "Engine capacity",
+];
+
 export default function Home() {
   const [input, setInput] = useState<string>("");
   const [text, setText] = useState<string[]>([]);
@@ -17,8 +31,14 @@ export default function Home() {
       for (let i = 0; i < words.length; i += 2) {
         updatedWords.push(`${words[i]} ${words[i + 1] ?? ""}`);
       }
+      const sortedUpdatedWords = updatedWords.sort(
+        (a, b) =>
+          fieldOrder.indexOf(a.split(":")[0]) -
+          fieldOrder.indexOf(b.split(":")[0])
+      );
+      console.log(updatedWords, sortedUpdatedWords);
 
-      setText(updatedWords);
+      setText(sortedUpdatedWords);
     } else {
       setText([]);
     }
@@ -39,7 +59,7 @@ export default function Home() {
           </h1>
         </div>
         <form className="px-12 py-4">
-          <div className="flex flex-col mx-auto">
+          <div className="flex flex-col mx-auto mb-4">
             <label
               htmlFor="input"
               className="text-white font-semibold text-lg md:text-xl"
@@ -53,6 +73,18 @@ export default function Home() {
               onChange={handleChange}
               value={input}
             ></textarea>
+          </div>
+          <div className="text-right w-full md:w-[70%]">
+            <button
+              type="reset"
+              className="bg-white text-black rounded-md py-2 px-4"
+              onClick={() => {
+                setInput("");
+                setText([]);
+              }}
+            >
+              Reset
+            </button>
           </div>
         </form>
         <section className="text-white px-12 py-4">
